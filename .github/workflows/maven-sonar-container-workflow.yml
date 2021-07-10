@@ -63,7 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        ./mvnw test org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+        ./mvnw verify sonar:sonar \
           -Dsonar.projectKey="StevenJDH_covid-tracker" \
           -Dsonar.organization="stevenjdh" \
           -Dsonar.host.url="https://sonarcloud.io" \
