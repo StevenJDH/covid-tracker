@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Covid Tracker.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:lang-xmllang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Coronavirus Tracker Application</title>
         <meta charset="UTF-8" />
@@ -51,9 +51,6 @@ along with Covid Tracker.  If not, see <http://www.gnu.org/licenses/>.
                             <span>New cases reported since previous day:</span>
                             <span th:text="${totalNewCases}"></span>
                         </p>
-                        <!--<h1 class="display-5 fw-bold">Custom jumbotron</h1>
-                        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-                        -->
                     </div>
                 </div>
                 
@@ -61,27 +58,28 @@ along with Covid Tracker.  If not, see <http://www.gnu.org/licenses/>.
                 <input class="form-control" id="myInput" type="text" placeholder="Search.." />
                 <br />
                 <table class="table table-bordered table-striped">
+                    <caption>Data provided by Johns Hopkins University CSSE on the geographic distribution of COVID-19 cases worldwide.</caption>
                     <thead>
                         <tr>
-                            <th>Province/State</th>
-                            <th>Country/Region</th>
-                            <th>Total cases reported</th>
-                            <th>Changes since yesterday</th>
+                            <th scope="col">Province/State</th>
+                            <th scope="col">Country/Region</th>
+                            <th scope="col">Total cases reported</th>
+                            <th scope="col">Changes since yesterday</th>
                         </tr>
                     </thead>
                     <tbody id="myTable">
                         <tr th:each="locationStat : ${locationStats}">
-                            <td th:text="${locationStat.state}"></td>
-                            <td th:text="${locationStat.country}"></td>
-                            <td th:text="${locationStat.latestTotalCases}">0</td>
-                            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+                            <td scope="row" th:text="${locationStat.state}"></td>
+                            <td scope="row" th:text="${locationStat.country}"></td>
+                            <td scope="row" th:text="${locationStat.latestTotalCases}">0</td>
+                            <td scope="row" th:text="${locationStat.diffFromPrevDay}">0</td>
                         </tr>
                     </tbody>    
                 </table>
             </div>
         </main>
         <footer class="container pt-3 mt-4 text-muted border-top">
-            Copyright &copy; <span id="copyright-year" data-year="2021"></span>, Steven Jenkins De Haro. Data provided by Johns Hopkins University CSSE.
+            Copyright &copy; <span id="copyright-year" data-year="2021"></span>, Steven Jenkins De Haro.
         </footer>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
