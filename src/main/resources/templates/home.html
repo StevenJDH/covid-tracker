@@ -69,10 +69,10 @@ along with Covid Tracker.  If not, see <http://www.gnu.org/licenses/>.
                     </thead>
                     <tbody id="myTable">
                         <tr th:each="locationStat : ${locationStats}">
-                            <td scope="row" th:text="${locationStat.state}"></td>
-                            <td scope="row" th:text="${locationStat.country}"></td>
-                            <td scope="row" th:text="${locationStat.latestTotalCases}">0</td>
-                            <td scope="row" th:text="${locationStat.diffFromPrevDay}">0</td>
+                            <td th:text="${locationStat.state}"></td>
+                            <td th:text="${locationStat.country}"></td>
+                            <td th:text="${locationStat.latestTotalCases}">0</td>
+                            <td th:text="${locationStat.diffFromPrevDay}">0</td>
                         </tr>
                     </tbody>    
                 </table>
