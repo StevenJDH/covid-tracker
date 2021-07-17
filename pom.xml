@@ -20,6 +20,7 @@
         <java.version>11</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
         <start-class>stevenjdh.covidtracker.CovidTrackerApplication</start-class>
         <!-- Indexes thymeleaf templates to detect Java XSS vulnerabilities. -->
         <sonar.sources>src/main/resources/templates</sonar.sources>
@@ -29,6 +30,11 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.language>java</sonar.language>
+        <!-- SonarCloud Links -->
+        <sonar.links.homepage>https://github.com/StevenJDH/covid-tracker</sonar.links.homepage>
+        <sonar.links.ci>https://github.com/StevenJDH/covid-tracker/actions</sonar.links.ci>
+        <sonar.links.issue>https://github.com/StevenJDH/covid-tracker/issues</sonar.links.issue>
+        <sonar.links.scm>https://github.com/StevenJDH/covid-tracker</sonar.links.scm>
     </properties>
     
     <dependencies>
@@ -49,6 +55,13 @@
             <groupId>org.jacoco</groupId> 
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>${jacoco.version}</version>
+            <exclusions>
+                <exclusion>
+                    <!-- Exclude JUnit 4x -->
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,13 +89,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <argLine>${argLine} -Dfile.encoding=${project.build.sourceEncoding}</argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>${java.version}</release>
@@ -94,8 +100,8 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                       <!-- Exclude class from test coverage -->
-                        <exclude>**/*stevenjdh/covidtracker/Config.class</exclude>
+                        <!-- Exclude class from test coverage -->
+                        <exclude>**/*stevenjdh/covidtracker/AppConfig.class</exclude>
                         <!-- Exclude full package from test coverage -->
                         <exclude>**/*stevenjdh/covidtracker/services/**</exclude>
                     </excludes>
