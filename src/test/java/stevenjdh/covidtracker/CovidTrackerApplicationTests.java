@@ -33,13 +33,13 @@ class CovidTrackerApplicationTests {
 
     @Test
     @DisplayName("Should initialize controller when context loads.")
-    public void Should_InitializeControler_When_ContextLoads() throws Exception {
+    void Should_InitializeControler_When_ContextLoads() throws Exception {
         assertThat(homeController).isNotNull();
     }
 
     @Test
     @DisplayName("Should display 200 total cases for test data.")
-    public void Should_Display200TotalCases_ForTestData() throws Exception {
+    void Should_Display200TotalCases_ForTestData() throws Exception {
         String expectedSubString = "<h2 class=\"display-4\">200</h2>";
         var stat = new LocationStat();
         
