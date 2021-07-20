@@ -22,8 +22,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
         <start-class>stevenjdh.covidtracker.CovidTrackerApplication</start-class>
-        <!-- Indexes thymeleaf templates to detect Java XSS vulnerabilities. -->
-        <sonar.sources>src/main/resources/templates</sonar.sources>
+        <!-- SonarCloud Indexing and Code Coverage Sources -->
+        <sonar.sources>src/main/java,src/main/resources/templates</sonar.sources>
+        <sonar.coverage.exclusions>**/*stevenjdh/covidtracker/AppConfig.java,**/*stevenjdh/covidtracker/services/**</sonar.coverage.exclusions>
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.7</jacoco.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
