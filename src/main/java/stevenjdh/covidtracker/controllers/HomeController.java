@@ -21,6 +21,7 @@ package stevenjdh.covidtracker.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import stevenjdh.covidtracker.models.LocationStat;
 import stevenjdh.covidtracker.services.CovidDataService;
 
 @Controller
@@ -35,8 +36,8 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         var locationStats = covidDataService.getLocationStats();
-        int totalReportedCases = locationStats.stream().mapToInt(stat -> stat.getLatestTotalCases()).sum();
-        int totalNewCases = locationStats.stream().mapToInt(stat -> stat.getDiffFromPrevDay()).sum();
+        int totalReportedCases = locationStats.stream().mapToInt(LocationStat::getLatestTotalCases).sum();
+        int totalNewCases = locationStats.stream().mapToInt(LocationStat::getDiffFromPrevDay).sum();
         
         model.addAttribute("locationStats", locationStats);
         model.addAttribute("totalReportedCases", totalReportedCases);
