@@ -4,7 +4,7 @@ COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 FROM adoptopenjdk/openjdk11:jre-11.0.11_9-alpine
-EXPOSE 8080
+EXPOSE 8080 8081
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 COPY --from=builder dependencies/ ./
