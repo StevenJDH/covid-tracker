@@ -18,18 +18,27 @@
 
 package stevenjdh.covidtracker;
 
-import org.junit.jupiter.api.Assertions;
+import java.net.http.HttpClient;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = CovidTrackerApplication.class)
-public class CovidTrackerApplicationTests {
+@SpringBootTest(classes = AppConfig.class)
+public class AppConfigTests {
 
+    @Autowired
+    private AppConfig appConfig;
+    
+    @Autowired
+    private HttpClient httpClient;
+    
     @Test
-    @DisplayName("Should pass sanity check when context loads.")
-    void Should_PassSanityCheck_When_ContextLoads() {
-        CovidTrackerApplication.main(new String[]{});
-        Assertions.assertNotNull("This is to make SonarCloud happy.");
+    @DisplayName("Should reference same object when instance is autowired.")
+    void Should_ReferenceSameObject_When_InstanceIsAutowired() {
+        assertThat(appConfig.httpClient()).isNotNull();
+        assertThat(httpClient).isNotNull();
+        assertThat(appConfig.httpClient()).isSameAs(httpClient);
     }
 }
