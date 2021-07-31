@@ -39,7 +39,7 @@ import stevenjdh.covidtracker.AppConfig;
 import stevenjdh.covidtracker.models.LocationStat;
 
 @WebMvcTest({CovidDataService.class, AppConfig.class})
-public class CovidDataServiceTests {
+class CovidDataServiceTests {
 
     @InjectMocks
     private CovidDataService covidDataService;
@@ -76,6 +76,15 @@ public class CovidDataServiceTests {
                 .sum());
         
         // Ensures caching is off for tests.
-        assertThat(cacheManager.getCacheNames()).hasSize(0);
+        assertThat(cacheManager.getCacheNames()).isEmpty();
+    }
+    
+    @Test
+    @DisplayName("Should return empty list when IOException is thrown.")
+    void Should_ReturnEmptyList_When_IOExceptionIsThrown() throws IOException, InterruptedException {        
+        when(mockClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
+                .thenThrow(new IOException("This is an IOException test."));
+        
+        assertEquals(0, covidDataService.getLocationStats().size());
     }
 }
