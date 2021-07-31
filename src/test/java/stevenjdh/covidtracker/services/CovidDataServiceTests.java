@@ -24,6 +24,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,9 @@ import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.cache.CacheManager;
 import stevenjdh.covidtracker.AppConfig;
 import stevenjdh.covidtracker.models.LocationStat;
 
@@ -46,6 +49,9 @@ public class CovidDataServiceTests {
     
     @Mock
     private HttpResponse<String> mockResponse;
+    
+    @Autowired
+    private CacheManager cacheManager;
     
     @Test
     @DisplayName("Should correctly parse statistics for test data.")
@@ -68,5 +74,8 @@ public class CovidDataServiceTests {
         assertEquals(21_658, locationStats.stream()
                 .mapToInt(LocationStat::getDiffFromPrevDay)
                 .sum());
+        
+        // Ensures caching is off for tests.
+        assertThat(cacheManager.getCacheNames()).hasSize(0);
     }
 }

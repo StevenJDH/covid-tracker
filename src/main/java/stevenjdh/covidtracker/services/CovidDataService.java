@@ -26,9 +26,12 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import stevenjdh.covidtracker.models.LocationStat;
@@ -37,20 +40,27 @@ import stevenjdh.covidtracker.models.LocationStat;
 public class CovidDataService {
 
     private static final String VIRUS_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
-    private List<LocationStat> locationStats = new ArrayList<>();
     private final HttpClient httpClient;
+    private static final Logger LOG = LoggerFactory.getLogger(CovidDataService.class);
     
     public CovidDataService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
     
+    @Cacheable(value = "stats", key = "#root.method.name")
     public List<LocationStat> getLocationStats() {
-        return locationStats;
+        LOG.info("Fetching the latest COVID-19 data...");
+        
+        try {
+            return fetchVirusData();
+        } catch (IOException | InterruptedException ex) {
+            LOG.error("Error: {}", ex.getMessage());
+            Thread.currentThread().interrupt(); // Restores interrupted state.
+            return new ArrayList<>();
+        }
     }
 
-    @PostConstruct
-    @Scheduled(cron = "0 0 0/1 1/1 * ?") // Runs every hour.
-    private void fetchVirusData() throws IOException, InterruptedException {
+    private List<LocationStat> fetchVirusData() throws IOException, InterruptedException{
         List<LocationStat> newLocationStats = new ArrayList<>();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(VIRUS_DATA_URL))
@@ -71,6 +81,13 @@ public class CovidDataService {
             newLocationStats.add(locationStat);
         }
         
-        locationStats = newLocationStats;
+        LOG.info("Latest COVID-19 data now cached.");
+        return newLocationStats;
+    }
+    
+    @Scheduled(cron = "0 0 0/1 1/1 * ?") // Runs every hour.
+    @CacheEvict(cacheNames = {"stats"}, allEntries = true)
+    public void evictCache() {
+        LOG.info("Evicting cached COVID-19 data.");
     }
 }
