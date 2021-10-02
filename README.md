@@ -25,10 +25,19 @@ Releases: [https://github.com/StevenJDH/covid-tracker/releases](https://github.c
 * Global COVID-19 statistics provided by Johns Hopkins University CSSE.
 * Total infected cases along with total new infections since previous day.
 * Dynamic filtering of geographic data.
-* Scheduled updates and caching of source data.
+* Scheduled cache control of source data.
 
 ## Prerequisites
 * Docker or Kubernetes for running the container.
+
+## Endpoints
+Below are the URL references used in the app.
+
+    GET :8080/
+    GET :8081/actuator/info
+    GET :8081/actuator/health
+    GET :8081/actuator/health/live
+    GET :8081/actuator/health/ready
 
 ## Contributing
 Thanks for your interest in contributing! There are many ways to contribute to this project. Get started [here](https://github.com/StevenJDH/.github/blob/main/docs/CONTRIBUTING.md).
