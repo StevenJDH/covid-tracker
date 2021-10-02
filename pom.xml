@@ -20,6 +20,9 @@
         <java.version>11</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
         <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
         <start-class>stevenjdh.covidtracker.CovidTrackerApplication</start-class>
         <!-- SonarCloud Indexing and Code Coverage Sources -->
@@ -60,18 +63,6 @@
             <version>1.8</version>
         </dependency>
         <dependency>
-            <groupId>org.jacoco</groupId> 
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.version}</version>
-            <exclusions>
-                <exclusion>
-                    <!-- Exclude JUnit 4x -->
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -85,6 +76,18 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <configuration>
+                        <goalPrefix>sonar</goalPrefix>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -141,6 +144,58 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                    <execution>
+                        <id>validate-the-git-infos</id>
+                        <goals>
+                          <goal>validateRevision</goal>
+                        </goals>
+                    <phase>verify</phase>
+                  </execution>
+                </executions>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <format>properties</format>
+                    <!-- Set <commitIdGenerationMode> to 'full' if <format> is set to 'json'. -->
+                    <commitIdGenerationMode>flat</commitIdGenerationMode>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
+                    <dateFormatTimeZone>UTC</dateFormatTimeZone>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <offline>true</offline>
+                    <!-- <includeOnlyProperties>
+                    </includeOnlyProperties> -->
+                    <excludeProperties>
+                        <excludeProperty>git.user.*</excludeProperty>
+                        <excludeProperty>^git.build.user.(email|name)$</excludeProperty>
+                        <excludeProperty>^git.commit.user.(email|name)$</excludeProperty>
+                        <excludeProperty>^git.commit.message.(short|full)$</excludeProperty>
+                    </excludeProperties>
+                    <injectAllReactorProjects>true</injectAllReactorProjects>
+                    <validationProperties>
+                      <!-- Verify that the project version does not end with '-SNAPSHOT'. -->
+                      <!-- May need <injectAllReactorProjects> set to 'true' to read POM. -->
+                      <validationProperty>
+                        <name>validating project version</name>
+                        <value>${project.version}</value>
+                        <!-- We could also use: <shouldMatchTo>^[0-9\.]*$</shouldMatchTo> -->
+                        <shouldMatchTo><![CDATA[^.*(?<!-SNAPSHOT)$]]></shouldMatchTo>
+                      </validationProperty>
+                    </validationProperties>
+                </configuration>
             </plugin>
         </plugins>
     </build>
