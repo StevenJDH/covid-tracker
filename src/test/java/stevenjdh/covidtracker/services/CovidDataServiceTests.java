@@ -18,6 +18,10 @@
 
 package stevenjdh.covidtracker.services;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
 import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -34,6 +38,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.cache.CacheManager;
@@ -88,5 +93,24 @@ class CovidDataServiceTests {
                 .thenThrow(new IOException("This is an IOException test."));
         
         assertEquals(0, covidDataService.getLocationStats().size());
+    }
+    
+    @Test
+    @DisplayName("Should display evicting cache in logs when triggering eviction.")
+    void Should_DisplayEvictingCacheInLogs_When_TriggeringEviction() throws IOException, InterruptedException {
+        String expectedMessage = "Evicting cached COVID-19 data.";
+        var logWatcher = new ListAppender<ILoggingEvent>();
+        var logger = (Logger) LoggerFactory.getLogger(CovidDataService.class.getName());
+        logger.addAppender(logWatcher);
+        
+        logWatcher.start();
+        covidDataService.evictCache();
+        logWatcher.stop();
+        
+        assertThat(logWatcher.list).hasSize(1)
+                .satisfies(logs -> {
+                    assertThat(logs.get(0).getFormattedMessage()).isEqualTo(expectedMessage);
+                    assertThat(logs.get(0).getLevel()).isEqualTo(Level.INFO);
+                });
     }
 }
