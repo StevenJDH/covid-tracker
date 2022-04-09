@@ -62,23 +62,29 @@ public class CovidDataService {
 
     private List<LocationStat> fetchVirusData() throws IOException, InterruptedException{
         List<LocationStat> newLocationStats = new ArrayList<>();
-        HttpRequest request = HttpRequest.newBuilder()
+        var request = HttpRequest.newBuilder()
                 .uri(URI.create(VIRUS_DATA_URL))
                 .build();
-        HttpResponse<String> httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        var csvBodyReader = new StringReader(httpResponse.body());
-        Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
+        var httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         
-        for (CSVRecord entry : records) {
-            var locationStat = new LocationStat();  
-            // Use country as default value if no Province/State specified.
-            locationStat.setState(entry.get(entry.get("Province/State").equals("") ? "Country/Region" : "Province/State"));
-            locationStat.setCountry(entry.get("Country/Region"));
-            int latestCases = Integer.parseInt(entry.get(entry.size() - 1));
-            int prevDayCases = Integer.parseInt(entry.get(entry.size() - 2));
-            locationStat.setLatestTotalCases(latestCases);
-            locationStat.setDiffFromPrevDay(latestCases - prevDayCases);
-            newLocationStats.add(locationStat);
+        try (var csvBodyReader = new StringReader(httpResponse.body())) {
+            Iterable<CSVRecord> records = CSVFormat.DEFAULT.builder()
+                .setHeader()
+                .setSkipHeaderRecord(true)
+                .build()
+                .parse(csvBodyReader);
+            
+            for (CSVRecord entry : records) {
+                var locationStat = new LocationStat();  
+                // Use country as default value if no Province/State specified.
+                locationStat.setState(entry.get(entry.get("Province/State").equals("") ? "Country/Region" : "Province/State"));
+                locationStat.setCountry(entry.get("Country/Region"));
+                int latestCases = Integer.parseInt(entry.get(entry.size() - 1));
+                int prevDayCases = Integer.parseInt(entry.get(entry.size() - 2));
+                locationStat.setLatestTotalCases(latestCases);
+                locationStat.setDiffFromPrevDay(latestCases - prevDayCases);
+                newLocationStats.add(locationStat);
+            }
         }
         
         LOG.info("Latest COVID-19 data now cached.");
