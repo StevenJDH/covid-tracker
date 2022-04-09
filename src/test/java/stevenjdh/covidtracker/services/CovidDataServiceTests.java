@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandler;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +32,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -55,14 +57,14 @@ class CovidDataServiceTests {
     
     @Test
     @DisplayName("Should correctly parse statistics for test data.")
-    void Should_CorrectlyParseStatistics_ForTestData() throws IOException, InterruptedException {        
+    void Should_CorrectlyParseStatistics_ForTestData() throws IOException, InterruptedException {
         Path testData = Path.of("target", "test-classes", "jhu-test-data.csv");
-
+        
         when(mockResponse.statusCode())
                 .thenReturn(200);
         when(mockResponse.body())
                 .thenReturn(Files.readString(testData));
-        when(mockClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
+        when(mockClient.send(any(HttpRequest.class), Mockito.<BodyHandler<String>>any()))
                 .thenReturn(mockResponse);
         
         var locationStats = covidDataService.getLocationStats();
@@ -81,8 +83,8 @@ class CovidDataServiceTests {
     
     @Test
     @DisplayName("Should return empty list when IOException is thrown.")
-    void Should_ReturnEmptyList_When_IOExceptionIsThrown() throws IOException, InterruptedException {        
-        when(mockClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
+    void Should_ReturnEmptyList_When_IOExceptionIsThrown() throws IOException, InterruptedException {
+        when(mockClient.send(any(HttpRequest.class), Mockito.<BodyHandler<String>>any()))
                 .thenThrow(new IOException("This is an IOException test."));
         
         assertEquals(0, covidDataService.getLocationStats().size());
