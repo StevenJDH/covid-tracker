@@ -12,7 +12,7 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=coverage)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=ncloc)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
-![Maintenance](https://img.shields.io/maintenance/yes/2021)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
 ![GitHub](https://img.shields.io/github/license/StevenJDH/covid-tracker)
 
 COVID-19 Tracker is a microservice that tracks the number of infected cases with the COVID-19 virus. Coronavirus disease (COVID-19) is the name given to a newly discovered strain of Coronavirus, called SARS-CoV-2, which was officially declared a Pandemic on 11 March 2020. Statistical data associated with COVID-19 changes rapidly, and there are various sources aggregating this data that update at different times, so do expect some variation in the data from other sites and sources. For more information regarding COVID-19, see the WHO's [COVID-19 Q&A](https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19) page.
@@ -36,8 +36,8 @@ Below are the URL references used in the app.
     GET :8080/
     GET :8081/actuator/info
     GET :8081/actuator/health
-    GET :8081/actuator/health/live
-    GET :8081/actuator/health/ready
+    GET :8081/actuator/health/liveness
+    GET :8081/actuator/health/readiness
 
 ## Contributing
 Thanks for your interest in contributing! There are many ways to contribute to this project. Get started [here](https://github.com/StevenJDH/.github/blob/main/docs/CONTRIBUTING.md).
