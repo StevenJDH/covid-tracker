@@ -1,6 +1,6 @@
 /*
  * This file is part of Covid Tracker <https://github.com/StevenJDH/covid-tracker>.
- * Copyright (C) 2021 Steven Jenkins De Haro.
+ * Copyright (C) 2021-2022 Steven Jenkins De Haro.
  *
  * Covid Tracker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
