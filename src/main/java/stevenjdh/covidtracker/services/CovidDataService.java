@@ -1,6 +1,6 @@
 /*
  * This file is part of Covid Tracker <https://github.com/StevenJDH/covid-tracker>.
- * Copyright (C) 2021 Steven Jenkins De Haro.
+ * Copyright (C) 2021-2022 Steven Jenkins De Haro.
  *
  * Covid Tracker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -91,7 +91,7 @@ public class CovidDataService {
         return newLocationStats;
     }
     
-    @Scheduled(cron = "0 0 0/1 1/1 * ?") // Runs every hour.
+    @Scheduled(cron = "${spring.cron.cacheExpireSchedule}", zone = "UTC")
     @CacheEvict(cacheNames = {"stats"}, allEntries = true)
     public void evictCache() {
         LOG.info("Evicting cached COVID-19 data.");
