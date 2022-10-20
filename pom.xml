@@ -30,7 +30,7 @@
     <groupId>stevenjdh</groupId>
     <artifactId>covid-tracker</artifactId>
     <version>1.0.0</version>
-    <name>covid-tracker</name>
+    <name>COVID 19 Tracker</name>
     <description>Tracks the number of infected cases with the COVID-19 virus.</description>
     
     <properties>
