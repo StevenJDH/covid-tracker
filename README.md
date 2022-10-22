@@ -28,7 +28,40 @@ Releases: [https://github.com/StevenJDH/covid-tracker/releases](https://github.c
 * Scheduled cache control of source data.
 
 ## Prerequisites
-* Docker or Kubernetes for running the container.
+* Docker/Rancher Desktop or Kubernetes for running the container.
+
+## Container registries
+COVID-19 Tracker container images are currently hosted on the following platforms:
+
+* [Amazon Elastic Container Registry (ECR)](https://gallery.ecr.aws/stevenjdh/covid-tracker)
+* [GitHub Container Registry](https://github.com/users/StevenJDH/packages/container/package/covid-tracker)
+* [Docker Hub](https://hub.docker.com/r/stevenjdh/covid-tracker)
+
+For production use cases, it is not recommended to pull an image with the `:latest` tag, or no tag since these are equivalent.
+
+## Helm chart
+COVID-19 Tracker can be optionally deployed to a Kubernetes cluster using the [COVID-19 Tracker Helm Chart](https://github.com/StevenJDH/helm-charts/tree/main/charts/covid-tracker) that is managed in a separate repository. All of the features described below and more are supported by this chart.
+
+## Usage
+To run the application locally, or access it without an Ingress resource, use one of the following approaches below.
+
+**Docker/Rancher Desktop:**
+
+```bash
+docker run --name covid-tracker -p 127.0.0.1:80:8080/tcp -d stevenjdh/covid-tracker:preview
+# OR
+nerdctl run --name covid-tracker -p 127.0.0.1:80:8080/tcp -d stevenjdh/covid-tracker:preview
+```
+
+**Kubernetes:**
+
+```bash
+kubectl run covid-tracker --image=stevenjdh/covid-tracker:preview --port 8080
+kubectl expose po covid-tracker --port 80 --target-port=8080 --name=covid-tracker
+kubectl port-forward svc/covid-tracker 80:80
+```
+
+Once the application is running, the UI can be accessed via http://localhost.
 
 ## Endpoints
 Below are the URL references used in the app.
@@ -38,6 +71,12 @@ Below are the URL references used in the app.
     GET :8081/actuator/health
     GET :8081/actuator/health/liveness
     GET :8081/actuator/health/readiness
+
+## Schedule for cached statistics
+Cached statistics are updated every hour by default in UTC time, and it can be overridden by the `SPRING_CRON_SCHEDULE` environment variable. The cron syntax used by Spring is different, so use [CronMaker](http://www.cronmaker.com) to generate the desired schedule. Take the result, and remove the last argument to make it valid. For example, `0 0 0/1 1/1 * ? *` is edited to become `0 0 0/1 1/1 * ?` for use in Spring.
+
+## Disclaimer
+COVID-19 Tracker is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ## Contributing
 Thanks for your interest in contributing! There are many ways to contribute to this project. Get started [here](https://github.com/StevenJDH/.github/blob/main/docs/CONTRIBUTING.md).
