@@ -17,26 +17,26 @@
  */
 
 @font-face {
-    font-family: "Special Elite";
-    src: url("/fonts/SpecialElite-Regular.ttf");
+  font-family: "Special Elite";
+  src: url("/fonts/SpecialElite-Regular.ttf");
 }
 
 /* Uses Bootstrap v4's jumbotron color in v5's changed approach. */
 .bg-jumbotron4 {
-    background-color: #e9ecef;
+  background-color: #e9ecef;
 }
 
 /* Color override */
 .fa-virus {
-    color: olivedrab;
+  color: olivedrab;
 }
 
 .logo {
-    font-family: 'Special Elite', var(--bs-font-sans-serif);
-    text-shadow: 4px 4px 4px #aaa;
+  font-family: 'Special Elite', var(--bs-font-sans-serif);
+  text-shadow: 4px 4px 4px #aaa;
 }
 
 /* Color override */
 .github-fork-ribbon:before {
-    background-color: #333;
+  background-color: #333;
 }
