@@ -23,9 +23,9 @@ $(document).ready(function() {
     
     var alterRibbon = function() {
         if (document.body.clientWidth < 800) {
-            $('.github-fork-ribbon').addClass('right-bottom');
+            $(".github-fork-ribbon").addClass("right-bottom");
         } else {
-            $('.github-fork-ribbon').removeClass('right-bottom');
+            $(".github-fork-ribbon").removeClass("right-bottom");
         };
     };
     $(window).resize(function(){

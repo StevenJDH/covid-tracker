@@ -68,14 +68,14 @@ along with Covid Tracker.  If not, see <http://www.gnu.org/licenses/>.
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="/js/covid-tracker-layout.js"></script>
         <script>
-            $('.rndImage').each(function() {
+            $(".rndImage").each(function() {
                 var images = [
-                    '/images/akira-kurosawa-japan.gif', 
-                    '/images/love-bear.gif', 
-                    '/images/sadface.gif', 
-                    '/images/samurai-fail.gif'
+                    "/images/akira-kurosawa-japan.gif", 
+                    "/images/love-bear.gif", 
+                    "/images/sadface.gif", 
+                    "/images/samurai-fail.gif"
                 ];
-                $(this).attr('src', images[Math.floor(Math.random() * images.length)]);
+                $(this).attr("src", images[Math.floor(Math.random() * images.length)]);
             });
         </script>
     </body>
