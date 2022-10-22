@@ -37,6 +37,6 @@
 }
 
 /* Color override */
-.github-fork-ribbon:before {
+.github-fork-ribbon::before {
   background-color: #333;
 }
