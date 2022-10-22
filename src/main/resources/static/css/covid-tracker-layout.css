@@ -40,3 +40,8 @@
 .github-fork-ribbon::before {
   background-color: #333;
 }
+
+/* Prevents ribbon jumping around on small screen refresh. */
+.github-fork-ribbon.right-top.delay {
+  display: none;
+}

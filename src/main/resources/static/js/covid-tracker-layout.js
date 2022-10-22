@@ -23,10 +23,11 @@ $(document).ready(function() {
     
     var alterRibbon = function() {
         if (document.body.clientWidth < 800) {
-            $(".github-fork-ribbon").addClass("right-bottom");
+            $(".github-fork-ribbon").addClass("right-bottom fixed");
+            $(".github-fork-ribbon").removeClass("delay");
         } else {
-            $(".github-fork-ribbon").removeClass("right-bottom");
-        };
+            $(".github-fork-ribbon").removeClass("right-bottom fixed delay");
+        }
     };
     $(window).resize(function(){
         alterRibbon();
