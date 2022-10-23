@@ -1,9 +1,9 @@
-FROM adoptopenjdk/openjdk11:jdk-11.0.16_8-alpine-slim as builder
+FROM eclipse-temurin:17-jdk-alpine as builder
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
-FROM adoptopenjdk/openjdk11:jre-11.0.16_8-alpine
+FROM eclipse-temurin:17-jre-alpine
 EXPOSE 8080 8081
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
