@@ -28,7 +28,9 @@ Releases: [https://github.com/StevenJDH/covid-tracker/releases](https://github.c
 * Scheduled cache control of source data.
 
 ## Prerequisites
-* Docker/Rancher Desktop or Kubernetes for running the container.
+* [Docker](https://www.docker.com/products/docker-desktop)/[Rancher](https://rancherdesktop.io) Desktop or Kubernetes for running the container.
+* Optional: Java 17+ ([Temurin/Adopt](https://adoptium.net)) OpenJDK for compiling.
+* Optional: [Maven](https://maven.apache.org) 3.8.4+ CLI for compiling.
 
 ## Container registries
 COVID-19 Tracker container images are currently hosted on the following platforms:
@@ -66,14 +68,16 @@ Once the application is running, the UI can be accessed via http://localhost.
 ## Endpoints
 Below are the URL references used in the app.
 
-    GET :8080/
-    GET :8081/actuator/info
-    GET :8081/actuator/health
-    GET :8081/actuator/health/liveness
-    GET :8081/actuator/health/readiness
+```text
+GET :8080/
+GET :8081/actuator/info
+GET :8081/actuator/health
+GET :8081/actuator/health/liveness
+GET :8081/actuator/health/readiness
+```
 
 ## Schedule for cached statistics
-Cached statistics are updated every hour by default in UTC time, and it can be overridden by the `SPRING_CRON_SCHEDULE` environment variable. The cron syntax used by Spring is different, so use [CronMaker](http://www.cronmaker.com) to generate the desired schedule. Take the result, and remove the last argument to make it valid. For example, `0 0 0/1 1/1 * ? *` is edited to become `0 0 0/1 1/1 * ?` for use in Spring.
+Cached statistics expire every 6 hours by default in UTC time, but it can be overridden using the `SPRING_CRON_SCHEDULE` environment variable. The cron syntax used by Spring is different, so use [CronMaker](http://www.cronmaker.com) to generate the desired schedule. Take the result, and remove the last argument to make it valid. For example, `0 0 0/1 1/1 * ? *` is edited to become `0 0 0/1 1/1 * ?` for use in Spring.
 
 ## Disclaimer
 COVID-19 Tracker is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
