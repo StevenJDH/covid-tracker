@@ -15,7 +15,7 @@
 ![Maintenance](https://img.shields.io/maintenance/yes/2022)
 ![GitHub](https://img.shields.io/github/license/StevenJDH/covid-tracker)
 
-COVID-19 Tracker is a microservice that tracks the number of infected cases with the COVID-19 virus. Coronavirus disease (COVID-19) is the name given to a newly discovered strain of Coronavirus, called SARS-CoV-2, which was officially declared a Pandemic on 11 March 2020. Statistical data associated with COVID-19 changes rapidly, and there are various sources aggregating this data that update at different times, so do expect some variation in the data from other sites and sources. For more information regarding COVID-19, see the WHO's [COVID-19 Q&A](https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19) page.
+COVID-19 Tracker is a microservice that tracks the number of infected cases with the COVID-19 virus. The Coronavirus disease (COVID-19) is the name given to a newly discovered strain of Coronavirus, called SARS-CoV-2, which was officially declared a Pandemic on 11 March 2020. Statistical data associated with COVID-19 changes rapidly, and there are various sources aggregating this data that update at different times, so do expect some variation in the data from other sites and sources. For more information regarding COVID-19, see the WHO's [COVID-19 Q&A](https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19) page.
 
 [![Buy me a coffee](https://img.shields.io/static/v1?label=Buy%20me%20a&message=coffee&color=important&style=flat&logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/stevenjdh)
 
@@ -35,9 +35,9 @@ Releases: [https://github.com/StevenJDH/covid-tracker/releases](https://github.c
 ## Container registries
 COVID-19 Tracker container images are currently hosted on the following platforms:
 
+* [Docker Hub](https://hub.docker.com/r/stevenjdh/covid-tracker)
 * [Amazon Elastic Container Registry (ECR)](https://gallery.ecr.aws/stevenjdh/covid-tracker)
 * [GitHub Container Registry](https://github.com/users/StevenJDH/packages/container/package/covid-tracker)
-* [Docker Hub](https://hub.docker.com/r/stevenjdh/covid-tracker)
 
 For production use cases, it is not recommended to pull an image with the `:latest` tag, or no tag since these are equivalent.
 
@@ -50,15 +50,15 @@ To run the application locally, or access it without an Ingress resource, use on
 **Docker/Rancher Desktop:**
 
 ```bash
-docker run --name covid-tracker -p 127.0.0.1:80:8080/tcp -d stevenjdh/covid-tracker:preview
+docker run --name covid-tracker -p 127.0.0.1:80:8080/tcp -d stevenjdh/covid-tracker:latest
 # OR
-nerdctl run --name covid-tracker -p 127.0.0.1:80:8080/tcp -d stevenjdh/covid-tracker:preview
+nerdctl run --name covid-tracker -p 127.0.0.1:80:8080/tcp -d stevenjdh/covid-tracker:latest
 ```
 
 **Kubernetes:**
 
 ```bash
-kubectl run covid-tracker --image=stevenjdh/covid-tracker:preview --port 8080
+kubectl run covid-tracker --image=stevenjdh/covid-tracker:latest --port 8080
 kubectl expose po covid-tracker --port 80 --target-port=8080 --name=covid-tracker
 kubectl port-forward svc/covid-tracker 80:80
 ```
