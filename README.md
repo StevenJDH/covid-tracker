@@ -12,7 +12,7 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=coverage)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=ncloc)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
-![Maintenance](https://img.shields.io/maintenance/yes/2022)
+![Maintenance](https://img.shields.io/maintenance/yes/2024)
 ![GitHub](https://img.shields.io/github/license/StevenJDH/covid-tracker)
 
 COVID-19 Tracker is a microservice that tracks the number of infected cases with the COVID-19 virus. The Coronavirus disease (COVID-19) is the name given to a newly discovered strain of Coronavirus, called SARS-CoV-2, which was officially declared a Pandemic on 11 March 2020. Statistical data associated with COVID-19 changes rapidly, and there are various sources aggregating this data that update at different times, so do expect some variation in the data from other sites and sources. For more information regarding COVID-19, see the WHO's [COVID-19 Q&A](https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19) page.
@@ -91,17 +91,10 @@ Many commonly asked questions are answered in the FAQ:
 
 ## Want to show your support?
 
-|Method       | Address                                                                                                    |
-|------------:|:-----------------------------------------------------------------------------------------------------------|
-|PayPal:      | [https://www.paypal.me/stevenjdh](https://www.paypal.me/stevenjdh "Steven's Paypal Page")                  |
-|Bitcoin:     | 3GyeQvN6imXEHVcdwrZwKHLZNGdnXeDfw2                                                                         |
-|Litecoin:    | MAJtR4ccdyUQtiiBpg9PwF2AZ6Xbk5ioLm                                                                         |
-|Ethereum:    | 0xa62b53c1d49f9C481e20E5675fbffDab2Fcda82E                                                                 |
-|Dash:        | Xw5bDL93fFNHe9FAGHV4hjoGfDpfwsqAAj                                                                         |
-|Zcash:       | t1a2Kr3jFv8WksgPBcMZFwiYM8Hn5QCMAs5                                                                        |
-|PIVX:        | DQq2qeny1TveZDcZFWwQVGdKchFGtzeieU                                                                         |
-|Ripple:      | rLHzPsX6oXkzU2qL12kHCH8G8cnZv1rBJh<br />Destination Tag: 2357564055                                        |
-|Monero:      | 4GdoN7NCTi8a5gZug7PrwZNKjvHFmKeV11L6pNJPgj5QNEHsN6eeX3D<br />&#8618;aAQFwZ1ufD4LYCZKArktt113W7QjWvQ7CWDXrwM8yCGgEdhV3Wt|
+|Method          | Address                                                                                   |
+|---------------:|:------------------------------------------------------------------------------------------|
+|PayPal:         | [https://www.paypal.me/stevenjdh](https://www.paypal.me/stevenjdh "Steven's Paypal Page") |
+|Cryptocurrency: | [Supported options](https://github.com/StevenJDH/StevenJDH/wiki/Donate-Cryptocurrency)    |
 
 
 // Steven Jenkins De Haro ("StevenJDH" on GitHub)
