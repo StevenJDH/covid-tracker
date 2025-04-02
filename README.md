@@ -2,7 +2,7 @@
 
 [![build](https://github.com/StevenJDH/covid-tracker/actions/workflows/maven-sonar-container-workflow.yml/badge.svg?branch=main)](https://github.com/StevenJDH/covid-tracker/actions/workflows/maven-sonar-container-workflow.yml)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/StevenJDH/covid-tracker?include_prereleases)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6b7925766c4c9ea36480a2f3e2d315)](https://www.codacy.com/gh/StevenJDH/covid-tracker/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=StevenJDH/covid-tracker&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6b7925766c4c9ea36480a2f3e2d315)](https://app.codacy.com/gh/StevenJDH/covid-tracker/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=StevenJDH/covid-tracker&amp;utm_campaign=Badge_Grade)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=alert_status)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
@@ -12,7 +12,7 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=coverage)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_covid-tracker&metric=ncloc)](https://sonarcloud.io/dashboard?id=StevenJDH_covid-tracker)
-![Maintenance](https://img.shields.io/maintenance/yes/2024)
+![Maintenance](https://img.shields.io/badge/yes-4FCA21?label=maintained&style=flat)
 ![GitHub](https://img.shields.io/github/license/StevenJDH/covid-tracker)
 
 COVID-19 Tracker is a microservice that tracks the number of infected cases with the COVID-19 virus. The Coronavirus disease (COVID-19) is the name given to a newly discovered strain of Coronavirus, called SARS-CoV-2, which was officially declared a Pandemic on 11 March 2020. Statistical data associated with COVID-19 changes rapidly, and there are various sources aggregating this data that update at different times, so do expect some variation in the data from other sites and sources. For more information regarding COVID-19, see the WHO's [COVID-19 Q&A](https://www.who.int/news-room/q-a-detail/coronavirus-disease-covid-19) page.
